@@ -41,7 +41,7 @@ export class HomeComponent implements OnInit {
 
   deleteProduct(produto: Product): void {
     if (!produto.id) return;
-    const confirmed = confirm("Você deseja deletar esse item permanentemente");
+    const confirmed = confirm("Você deseja deletar esse item permanentemente?");
     if (confirmed) {
       this.ProductService.deleteProduct(produto.id)
         .subscribe(
