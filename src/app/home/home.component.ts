@@ -1,10 +1,67 @@
-import { Component } from '@angular/core';
+import { Validators, FormBuilder } from '@angular/forms';
+import { Product } from './../shared/models/products';
+import { ProductService } from './../shared/services/product.service';
+import { Component, OnInit } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent {
 
+
+
+export class HomeComponent implements OnInit {
+  modalActive = false;
+  productForm = this.fb.group({
+    tipo: ['', Validators.required],
+    modelo: ['', Validators.required],
+    preco: ['', Validators.required],
+    quantidade: ['', Validators.required],
+    imagem: ['', Validators.required]
+  })
+  produtos: Product[] = [];
+
+  constructor(
+    private ProductService: ProductService,
+    private fb: FormBuilder
+  ) { }
+
+  ngOnInit(): void {
+    this.fetchAllProducts();
+  }
+
+  fetchAllProducts(): void {
+    this.ProductService.getProducts()
+      .subscribe(produtos => {
+        this.produtos = produtos;
+      });
+  }
+
+  deleteProduct(produto: Product): void {
+    if (!produto.id) return;
+    const confirmed = confirm("Você deseja deletar esse item permanentemente");
+    if (confirmed) {
+      this.ProductService.deleteProduct(produto.id)
+        .subscribe(
+          () => {
+            this.fetchAllProducts();
+          },
+          error => console.log(error)
+        )
+    }
+  }
+
+  addProduct(): void {
+    const newProduct = this.productForm.value;
+    this.ProductService.createProduct(newProduct)
+      .subscribe(
+        res => {
+          this.fetchAllProducts();
+          this.productForm.reset();
+        },
+        error => console.log(error)
+      )
+  }
 }

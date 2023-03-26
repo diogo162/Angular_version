@@ -1,4 +1,95 @@
-<p>home works!</p>
-<nav>
-    <a routerLink="/heroes">Heroes</a>
-  </nav>
+<div class="home">
+  <div class="button-container">
+    <button class="btn btn-add btn-blue" (click)="modalActive = true">
+      + Adicionar carro
+    </button>
+  </div>
+
+  <div class="title-container">
+    <hr />
+    <h4 class="title">Produtos cadastrados</h4>
+    <hr />
+  </div>
+
+  <div class="items-container">
+    <div class="items">
+      <div class="item" *ngFor="let produto of produtos">
+        <h4 class="title">{{ produto.tipo }} {{ produto.modelo }}</h4>
+        <span>Preço: {{ produto.preco }}</span>
+        <span>Quantidade: {{ produto.quantidade }}</span>
+        <!-- Adicionei um botão para deletar o carro, que recebe o id -->
+        <button (click)="deleteProduct(produto)" class="btn btn-red">Deletar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="modalActive" class="modal new">
+  <div class="form-container">
+    <form class="form" [formGroup]="productForm" (ngSubmit)="addProduct()">
+      <h3 class="title center">Adicione um novo carro:</h3>
+
+      <div class="field-container">
+        <label for="brand">Marca:</label>
+        <input
+          id="brand"
+          type="text"
+          formControlName="brand"
+          [class.invalid]="
+            productForm.get('brand')?.invalid && productForm.get('brand')?.touched
+          "
+        />
+      </div>
+
+      <div class="field-container">
+        <label for="model">Modelo:</label>
+        <input
+          id="model"
+          type="text"
+          formControlName="model"
+          [class.invalid]="
+            productForm.get('model')?.invalid && productForm.get('model')?.touched
+          "
+        />
+      </div>
+
+      <div class="field-container">
+        <label for="year">Ano:</label>
+        <input
+          id="year"
+          type="text"
+          formControlName="year"
+          [class.invalid]="
+            productForm.get('year')?.invalid && productForm.get('year')?.touched
+          "
+        />
+      </div>
+
+      <div class="field-container">
+        <label for="license">Placa:</label>
+        <input
+          id="license"
+          type="text"
+          formControlName="license"
+          [class.invalid]="
+            productForm.get('license')?.invalid && productForm.get('license')?.touched
+          "
+        />
+      </div>
+
+      <div class="btn-container">
+        <button
+          [disabled]="productForm.invalid"
+          type="submit"
+          class="btn btn-green"
+        >
+          Adicionar
+        </button>
+        <button class="btn btn-red" (click)="modalActive = false">
+          Cancelar
+        </button>
+      </div>
+    </form>
+    <div></div>
+  </div>
+</div>
