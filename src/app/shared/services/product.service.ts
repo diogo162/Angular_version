@@ -1,3 +1,4 @@
+import { environment } from './../../../environments/environment';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 import { Observable } from 'rxjs';
@@ -7,14 +8,14 @@ import { Product } from '../models/products';
   providedIn: 'root'
 })
 export class ProductService {
-  private baseUrl = "http://localhost:3000/";
+  private baseUrl = environment.productsApiBaseUrl;
 
   constructor(
     private http: HttpClient
   ) { }
 
   getProducts(): Observable<Product[]> {
-    const url = this.baseUrl + "carro";
+    const url = this.baseUrl + "produtos";
     return this.http.get<Product[]>(url);
   }
 
@@ -24,7 +25,7 @@ export class ProductService {
   }
 
   createProduct(product: Product): Observable<Object> {
-    const url = this.baseUrl + "produto";
+    const url = this.baseUrl + "produtos";
     return this.http.post<Object>(url, product);
   }
 

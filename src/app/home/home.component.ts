@@ -2,7 +2,6 @@ import { Validators, FormBuilder } from '@angular/forms';
 import { Product } from './../shared/models/products';
 import { ProductService } from './../shared/services/product.service';
 import { Component, OnInit } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
@@ -17,8 +16,8 @@ export class HomeComponent implements OnInit {
   productForm = this.fb.group({
     tipo: ['', Validators.required],
     modelo: ['', Validators.required],
-    preco: ['', Validators.required],
-    quantidade: ['', Validators.required],
+    preco: [0, Validators.required],
+    quantidade: [0, Validators.required],
     imagem: ['', Validators.required]
   })
   produtos: Product[] = [];
@@ -54,8 +53,8 @@ export class HomeComponent implements OnInit {
   }
 
   addProduct(): void {
-    const newProduct = this.productForm.value;
-    this.ProductService.createProduct(newProduct)
+    const newProduct = this.productForm.value as Partial<Product>;
+    this.ProductService.createProduct(newProduct as Product)
       .subscribe(
         res => {
           this.fetchAllProducts();

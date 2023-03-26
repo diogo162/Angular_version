@@ -1,7 +1,7 @@
 <div class="home">
   <div class="button-container">
     <button class="btn btn-add btn-blue" (click)="modalActive = true">
-      + Adicionar carro
+      + Adicionar produto
     </button>
   </div>
 
@@ -17,7 +17,7 @@
         <h4 class="title">{{ produto.tipo }} {{ produto.modelo }}</h4>
         <span>Preço: {{ produto.preco }}</span>
         <span>Quantidade: {{ produto.quantidade }}</span>
-        <!-- Adicionei um botão para deletar o carro, que recebe o id -->
+        <!-- Adicionei um botão para deletar o produto, que recebe o id -->
         <button (click)="deleteProduct(produto)" class="btn btn-red">Deletar</button>
       </div>
     </div>
@@ -27,52 +27,64 @@
 <div *ngIf="modalActive" class="modal new">
   <div class="form-container">
     <form class="form" [formGroup]="productForm" (ngSubmit)="addProduct()">
-      <h3 class="title center">Adicione um novo carro:</h3>
+      <h3 class="title center">Adicione um novo produto:</h3>
 
       <div class="field-container">
-        <label for="brand">Marca:</label>
+        <label for="tipo">Tipo:</label>
         <input
-          id="brand"
+          id="tipo"
           type="text"
-          formControlName="brand"
+          formControlName="tipo"
           [class.invalid]="
-            productForm.get('brand')?.invalid && productForm.get('brand')?.touched
+            productForm.get('tipo')?.invalid && productForm.get('tipo')?.touched
           "
         />
       </div>
 
       <div class="field-container">
-        <label for="model">Modelo:</label>
+        <label for="modelo">Modelo:</label>
         <input
-          id="model"
+          id="modelo"
           type="text"
-          formControlName="model"
+          formControlName="modelo"
           [class.invalid]="
-            productForm.get('model')?.invalid && productForm.get('model')?.touched
+            productForm.get('modelo')?.invalid && productForm.get('modelo')?.touched
           "
         />
       </div>
 
       <div class="field-container">
-        <label for="year">Ano:</label>
+        <label for="preco">Preço:</label>
         <input
-          id="year"
-          type="text"
-          formControlName="year"
+          id="preco"
+          type="number"
+          formControlName="preco"
           [class.invalid]="
-            productForm.get('year')?.invalid && productForm.get('year')?.touched
+            productForm.get('preco')?.invalid && productForm.get('preco')?.touched
           "
         />
       </div>
 
       <div class="field-container">
-        <label for="license">Placa:</label>
+        <label for="quantidade">Quantidade:</label>
         <input
-          id="license"
-          type="text"
-          formControlName="license"
+          id="quantidade"
+          type="number"
+          formControlName="quantidade"
           [class.invalid]="
-            productForm.get('license')?.invalid && productForm.get('license')?.touched
+            productForm.get('quantidade')?.invalid && productForm.get('quantidade')?.touched
+          "
+        />
+      </div>
+
+      <div class="field-container">
+        <label for="imagem">Imagem</label>
+        <input
+          id="imagem"
+          type="url"
+          formControlName="imagem"
+          [class.invalid]="
+            productForm.get('imagem')?.invalid && productForm.get('imagem')?.touched
           "
         />
       </div>
@@ -81,7 +93,7 @@
         <button
           [disabled]="productForm.invalid"
           type="submit"
-          class="btn btn-green"
+          class="btn btn-green" (click)="modalActive = false"
         >
           Adicionar
         </button>
