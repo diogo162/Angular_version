@@ -13,7 +13,8 @@ import { Component, OnInit } from '@angular/core';
 
 export class HomeComponent implements OnInit {
   modalActive = false;
-  productForm = this.fb.group({
+  modalEdit = false;
+  productForm = this.fb.nonNullable.group({
     tipo: ['', Validators.required],
     modelo: ['', Validators.required],
     preco: [0, Validators.required],
@@ -51,14 +52,29 @@ export class HomeComponent implements OnInit {
   }
 
   addProduct(): void {
-    const newProduct = this.productForm.value as Partial<Product>;
-    this.ProductService.createProduct(newProduct as Product)
+    const newProduct = this.productForm.getRawValue();
+    this.ProductService.createProduct(newProduct)
       .subscribe(
         res => {
+          console.log('Produto atualizado com sucesso');
           this.fetchAllProducts();
           this.productForm.reset();
         },
         error => console.log(error)
       )
+  }
+
+  updateProduct(produto: Product): void {
+    if (!produto.id) {
+      console.log('ID do produto não especificado');
+      return;
+    }
+    this.ProductService.updateProduct(produto, produto.id)
+      .subscribe(() => {
+          console.log('Produto atualizado com sucesso');
+          this.fetchAllProducts();
+        },
+        error => console.log(error)
+      );
   }
 }

@@ -10,9 +10,6 @@ import { HeaderComponent } from './shared/components/header/header.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { pgConfig } from './app.config';
-import { ProductService } from './shared/services/product.service';
-
 @NgModule({
   declarations: [
     AppComponent,

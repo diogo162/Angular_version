@@ -19,6 +19,7 @@
         <span>Quantidade: {{ produto.quantidade }}</span>
         <!-- Adicionei um botão para deletar o produto, que recebe o id -->
         <button (click)="deleteProduct(produto)" class="btn btn-red">Deletar</button>
+        <button (click)="updateProduct(produto)" class="btn btn-yellow" (click)="modalEdit = true">Editar</button>
       </div>
     </div>
   </div>
@@ -83,6 +84,7 @@
           id="imagem"
           type="url"
           formControlName="imagem"
+          width="100"
           [class.invalid]="
             productForm.get('imagem')?.invalid && productForm.get('imagem')?.touched
           "
@@ -98,6 +100,89 @@
           Adicionar
         </button>
         <button class="btn btn-red" (click)="modalActive = false">
+          Cancelar
+        </button>
+      </div>
+    </form>
+    <div></div>
+  </div>
+</div>
+
+<div *ngIf="modalEdit" class="modal new">
+  <div class="form-container">
+    <form class="form" [formGroup]="productForm" >
+      <h3 class="title center">Edite o produto:</h3>
+
+      <div class="field-container">
+        <label for="tipo">Tipo:</label>
+        <input
+          id="tipo"
+          type="text"
+          formControlName="tipo"
+          [class.invalid]="
+            productForm.get('tipo')?.invalid && productForm.get('tipo')?.touched
+          "
+        />
+      </div>
+
+      <div class="field-container">
+        <label for="modelo">Modelo:</label>
+        <input
+          id="modelo"
+          type="text"
+          formControlName="modelo"
+          [class.invalid]="
+            productForm.get('modelo')?.invalid && productForm.get('modelo')?.touched
+          "
+        />
+      </div>
+
+      <div class="field-container">
+        <label for="preco">Preço:</label>
+        <input
+          id="preco"
+          type="number"
+          formControlName="preco"
+          [class.invalid]="
+            productForm.get('preco')?.invalid && productForm.get('preco')?.touched
+          "
+        />
+      </div>
+
+      <div class="field-container">
+        <label for="quantidade">Quantidade:</label>
+        <input
+          id="quantidade"
+          type="number"
+          formControlName="quantidade"
+          [class.invalid]="
+            productForm.get('quantidade')?.invalid && productForm.get('quantidade')?.touched
+          "
+        />
+      </div>
+
+      <div class="field-container">
+        <label for="imagem">Imagem</label>
+        <input
+          id="imagem"
+          type="url"
+          formControlName="imagem"
+          width="100"
+          [class.invalid]="
+            productForm.get('imagem')?.invalid && productForm.get('imagem')?.touched
+          "
+        />
+      </div>
+
+      <div class="btn-container">
+        <button
+          [disabled]="productForm.invalid"
+          type="submit"
+          class="btn btn-green" (click)="modalEdit= false"
+        >
+          Editar
+        </button>
+        <button class="btn btn-red" (click)="modalEdit = false">
           Cancelar
         </button>
       </div>
