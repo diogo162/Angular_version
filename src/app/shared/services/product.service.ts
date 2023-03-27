@@ -15,27 +15,27 @@ export class ProductService {
   ) { }
 
   getProducts(): Observable<Product[]> {
-    const url = this.baseUrl + "produtos";
+    const url = this.baseUrl;
     return this.http.get<Product[]>(url);
   }
 
   deleteProduct(id: string): Observable<Object> {
-    const url = this.baseUrl + id;
+    const url = this.baseUrl + '/' + id;
     return this.http.delete<Object>(url);
   }
 
   createProduct(product: Product): Observable<Object> {
-    const url = this.baseUrl + "produtos";
+    const url = this.baseUrl;
     return this.http.post<Object>(url, product);
   }
 
   getProduct(id: string): Observable<Product> {
-    const url = this.baseUrl + id;
+    const url = this.baseUrl + '/' + id;
     return this.http.get<Product>(url);
   }
 
   updateProduct(product: Product, id: string): Observable<Object> {
-    const url = this.baseUrl + id;
+    const url = this.baseUrl + '/' + id;
     return this.http.put<Object>(url, product);
   }
 }

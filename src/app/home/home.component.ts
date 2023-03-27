@@ -33,9 +33,7 @@ export class HomeComponent implements OnInit {
 
   fetchAllProducts(): void {
     this.ProductService.getProducts()
-      .subscribe(produtos => {
-        this.produtos = produtos;
-      });
+      .subscribe(produtos => this.produtos = produtos);
   }
 
   deleteProduct(produto: Product): void {
