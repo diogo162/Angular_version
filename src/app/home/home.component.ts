@@ -56,9 +56,10 @@ export class HomeComponent implements OnInit {
     this.ProductService.createProduct(newProduct)
       .subscribe(
         res => {
-          console.log('Produto atualizado com sucesso');
+          console.log('Produto adicionado com sucesso');
           this.fetchAllProducts();
           this.productForm.reset();
+          this.modalEdit = false;
         },
         error => console.log(error)
       )
@@ -69,12 +70,17 @@ export class HomeComponent implements OnInit {
       console.log('ID do produto não especificado');
       return;
     }
-    this.ProductService.updateProduct(produto, produto.id)
-      .subscribe(() => {
+    const editor = this.ProductService.getProduct(produto.id);
+    const newProduct = this.productForm.getRawValue();
+    this.ProductService.updateProduct(newProduct, produto.id)
+      .subscribe(
+        res => {
           console.log('Produto atualizado com sucesso');
           this.fetchAllProducts();
+          this.productForm.reset();
+          this.modalEdit = false;
         },
         error => console.log(error)
-      );
+      )
   }
 }
