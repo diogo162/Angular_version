@@ -1,11 +1,17 @@
 .header {
-    width: 100%;
-    box-sizing: border-box;
-    padding: 1rem 2rem;
-    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.218);
-  
-    .logo {
-        font-size: 1.3rem;
+
+    * {
+        margin: -8px;
+        margin-right: -8px;
+        padding: 30px;
     }
-  }
-  
+
+    .logo {
+        text-align: center;
+        background-color: black;
+        color: #dddddd;
+        font-family: Arial, sans-serif;
+        font-size: 40px;
+        ;
+    }
+}
