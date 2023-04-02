@@ -7,19 +7,19 @@
 
   <div class="title-container">
     <hr />
-    <h4 class="title">Produtos cadastrados</h4>
+    <h4 class="title">STIIM<br>Produtos cadastrados</h4>
     <hr />
   </div>
-
-  <div class="items-container">
+  <div class="items-container"> 
     <div class="items">
       <div class="item" *ngFor="let produto of produtos">
         <h4 class="title">{{ produto.tipo }} {{ produto.modelo }}</h4>
         <span>Preço: {{ produto.preco }}</span>
         <span>Quantidade: {{ produto.quantidade }}</span>
+        <img [src]="produto.imagem"  width="150" height="150"/>
         <!-- Adicionei um botão para deletar o produto, que recebe o id -->
-        <button (click)="deleteProduct(produto)" class="btn btn-red">Deletar</button>
         <button (click)="editProduct(produto)" class="btn btn-yellow" (click)="modalEdit = true">Editar</button>
+        <button (click)="deleteProduct(produto)" class="btn btn-red">Deletar</button>
       </div>
     </div>
   </div>
@@ -84,7 +84,7 @@
           id="imagem"
           type="url"
           formControlName="imagem"
-          width="100"
+          width="100px"
           [class.invalid]="
             productForm.get('imagem')?.invalid && productForm.get('imagem')?.touched
           "
@@ -166,7 +166,7 @@
           id="imagem"
           type="url"
           formControlName="imagem"
-          width="100"
+          width="100px"
           [class.invalid]="
             productForm.get('imagem')?.invalid && productForm.get('imagem')?.touched
           "
