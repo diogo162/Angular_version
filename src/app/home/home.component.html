@@ -19,7 +19,7 @@
         <span>Quantidade: {{ produto.quantidade }}</span>
         <!-- Adicionei um botão para deletar o produto, que recebe o id -->
         <button (click)="deleteProduct(produto)" class="btn btn-red">Deletar</button>
-        <button (click)="updateProduct(produto)" class="btn btn-yellow" (click)="modalEdit = true">Editar</button>
+        <button (click)="editProduct(produto)" class="btn btn-yellow" (click)="modalEdit = true">Editar</button>
       </div>
     </div>
   </div>
@@ -109,7 +109,7 @@
 
 <div *ngIf="modalEdit" class="modal new">
   <div class="form-container">
-    <form class="form" [formGroup]="productForm" >
+    <form class="form" [formGroup]="productForm" (ngSubmit)="updateProduct()">
       <h3 class="title center">Edite o produto:</h3>
 
       <div class="field-container">

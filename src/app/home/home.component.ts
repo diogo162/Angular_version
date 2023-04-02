@@ -15,6 +15,7 @@ export class HomeComponent implements OnInit {
   modalActive = false;
   modalEdit = false;
   productForm = this.fb.nonNullable.group({
+    id: [''],
     tipo: ['', Validators.required],
     modelo: ['', Validators.required],
     preco: [0, Validators.required],
@@ -65,17 +66,27 @@ export class HomeComponent implements OnInit {
       )
   }
 
-  updateProduct(produto: Product): void {
-    if (!produto.id) {
-      console.log('ID do produto não especificado');
-      return;
-    }
-    const editor = this.ProductService.getProduct(produto.id);
-    const newProduct = this.productForm.getRawValue();
-    this.ProductService.updateProduct(newProduct, produto.id)
+  editProduct(produto: Product) {
+    this.productForm.patchValue({
+      id: produto.id,
+      tipo: produto.tipo,
+      modelo: produto.modelo,
+      preco: produto.preco,
+      quantidade: produto.quantidade,
+      imagem: produto.imagem
+    });
+    this.modalEdit = true;
+  }
+
+  
+
+  updateProduct() {
+    const updatedProduct = this.productForm.getRawValue();
+    console.log(updatedProduct)
+    this.ProductService.updateProduct(updatedProduct, updatedProduct.id)
       .subscribe(
         res => {
-          console.log('Produto atualizado com sucesso');
+          console.log('Produto editado com sucesso');
           this.fetchAllProducts();
           this.productForm.reset();
           this.modalEdit = false;
@@ -84,3 +95,4 @@ export class HomeComponent implements OnInit {
       )
   }
 }
+  
