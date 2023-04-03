@@ -53,6 +53,7 @@ export class HomeComponent implements OnInit {
   }
 
   addProduct(): void {
+    this.modalActive = false;
     const newProduct = this.productForm.getRawValue();
     this.ProductService.createProduct(newProduct)
       .subscribe(

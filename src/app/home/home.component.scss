@@ -6,6 +6,19 @@
   margin: -8px;
   padding: 0;
 
+  .btn-normal{
+    background-color: #948c8c;
+    border: none;
+    color: #ffffff;
+    font-size: 1rem;
+    width: 150px;
+    padding: 10px;
+    margin: 0;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+  }
+
   .title-container {
     font-size: 20px;
     font-weight: bold;
@@ -39,20 +52,29 @@
     padding: 0;
   }
 
+  .imagem{
+    width: 100%;
+    height:200px;
+    object-fit: contain;
+  }
+
   .items {
-    width: fit-content;
+    width: min-content;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 1rem;
 
     .item {
+      display:flex;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      flex-direction: column;
+      color: white;
       box-sizing: border-box;
-      width: 17.9vw;
-      padding: 2rem;
+      width: 15vw;
+      padding: 10px;
       border-radius: 5px;
       box-shadow: 1px 1px 4px rgba(128, 128, 128, 0.363);
-      display: flex;
-      flex-direction: column;
       gap: 10px;
 
 
