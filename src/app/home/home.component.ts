@@ -53,7 +53,6 @@ export class HomeComponent implements OnInit {
   }
 
   addProduct(): void {
-    this.modalActive = false;
     const newProduct = this.productForm.getRawValue();
     this.ProductService.createProduct(newProduct)
       .subscribe(
@@ -61,6 +60,7 @@ export class HomeComponent implements OnInit {
           console.log('Produto adicionado com sucesso');
           this.fetchAllProducts();
           this.productForm.reset();
+          this.modalActive = false;
           this.modalEdit = false;
         },
         error => console.log(error)
@@ -79,11 +79,8 @@ export class HomeComponent implements OnInit {
     this.modalEdit = true;
   }
 
-  
-
   updateProduct() {
     const updatedProduct = this.productForm.getRawValue();
-    console.log(updatedProduct)
     this.ProductService.updateProduct(updatedProduct, updatedProduct.id)
       .subscribe(
         res => {

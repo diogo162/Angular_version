@@ -16,7 +16,7 @@
         <h4 class="title">{{ produto.tipo }} {{ produto.modelo }}</h4>
         <span>Preço: {{ produto.preco }}</span>
         <span>Quantidade: {{ produto.quantidade }}</span>
-        <img class="imagem" [src]="produto.imagem"  width="150" height="150"/>
+        <img class="imagem" [src]="produto.imagem"/>
         <!-- Adicionei um botão para deletar o produto, que recebe o id -->
         <button (click)="editProduct(produto)" class="btn btn-normal btn-yellow" (click)="modalEdit = true">Editar</button>
         <button (click)="deleteProduct(produto)" class="btn btn-normal btn-red">Deletar</button>
