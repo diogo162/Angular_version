@@ -92,5 +92,16 @@ export class HomeComponent implements OnInit {
         error => console.log(error)
       )
   }
+
+  closeModalEdit(): void {
+    this.modalEdit = false;
+    this.productForm.reset();
+  }
+
+  closeModalAdd(): void {
+    this.modalActive = false;
+    this.productForm.reset();
+}
+
 }
   
